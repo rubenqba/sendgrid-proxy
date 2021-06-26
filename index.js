@@ -5,7 +5,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 
 const port = process.env.PORT;
-const HOST = 'localhost';
+const host = process.env.HOSTNAME;
+const redirect = process.env.REDIRECT;
 const SENDGRID_URL = 'https://sendgrid.net';
 
 app.use(morgan('dev'));
@@ -15,11 +16,11 @@ app.use('/', createProxyMiddleware({
     changeOrigin: true,
     secure: false,
     headers: {
-        'Host': 'url1234.yourdomain.com'
+        'Host': `${redirect}`
     }
 }));
 
-app.listen(port, HOST, () => {
-    console.log(`Starting Proxy at ${HOST}:${port}`);
+app.listen(port, host, () => {
+    console.log(`Starting Proxy at ${host}:${port}`);
     console.log(`posting env: ${JSON.stringify(process.env, null, 2)}`);
 });
