@@ -21,4 +21,5 @@ app.use('/', createProxyMiddleware({
 
 app.listen(PORT, HOST, () => {
     console.log(`Starting Proxy at ${HOST}:${PORT}`);
+    console.log(`posting env: ${JSON.stringify(process.env, null, 2)}`);
 });
